@@ -51,6 +51,8 @@ It queries the metadata you defined in `gatsby-config.js` and returns a data obj
 
 ## Add a blog post
 
+New posts are drafted on the `dev` branch and pull-requested over to `master` when they're ready to be reviewed & deployed.
+
 We write blog posts in markdown and automatically generate pages from them using Gatsby's Node API.
 
 To publish a new post, simply create a .md file in `/src/posts/`. The file name will become it's URL slug, so use hyphens.
@@ -72,7 +74,7 @@ Enter down to make a new paragraph.
 
 ## Deploy
 
-Run `npm run deploy` or `yarn deploy`.
+Run `npm run deploy` or `yarn deploy` from the `master` branch.
 
 Either will trigger `gatsby build` and then publish the site to `gh-pages`.
 
