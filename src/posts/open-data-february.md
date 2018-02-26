@@ -11,6 +11,9 @@ tags: ["open-data", "open-data-changelog"]
 - Rental Inspections & Rental Certifications 
   - Inspections now represent every type of inspection conducted by BSEED on rental properties: https://data.detroitmi.gov/d/8fw7-n38z
   - Certifications reflect rental properties inspected and approved for certification in the last year: https://data.detroitmi.gov/d/64cb-n6dd
+- All Schools 2017-2018
+  - https://data.detroitmi.gov/d/wn8n-5a4d
+  - All schools, including charters and their authorizers, as well as student counts where available
 
 ### Existing datasets
 
