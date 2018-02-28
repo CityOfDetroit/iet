@@ -22,8 +22,8 @@ const TemplateWrapper = ({ children }) => (
     <Helmet
       title="IET | City of Detroit"
       meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
+        { name: 'description', content: 'Work by Office of Innovation & Emerging Technology' },
+        { name: 'keywords', content: 'open data, emerging technology, $INNOVATION, detroit' },
       ]}
     />
     <Header />
