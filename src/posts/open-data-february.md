@@ -14,12 +14,15 @@ tags: ["open-data", "open-data-changelog"]
 - All Schools 2017-2018
   - https://data.detroitmi.gov/d/wn8n-5a4d
   - All schools, including charters and their authorizers, as well as student counts where available
+- Traffic Crashes 2011-2016
+  - https://data.detroitmi.gov/d/9fph-m2jv
+  - These were sourced from SEMCOG's open data portal and made to fit together into one table structure.
 
 ### Existing datasets
 
 - Business Certification Register now updates __daily__: https://data.detroitmi.gov/d/v4da-ysyn
 - DFD Fire Incidents includes incidents through 2/10/2018: https://data.detroitmi.gov/d/x6ys-22yr
-- GTFS includes new DDOT schedule changes implemented at the end of the January: 
+- GTFS includes new DDOT schedule changes implemented at the end of the January: https://data.detroitmi.gov/d/y62d-bvsz
 
 ### New tools built with open data
 
