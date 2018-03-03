@@ -16,6 +16,8 @@ Install Gatsby's command line tools globally:
 
 Then, clone this site and install dependencies.
 
+Add the Airtable API key to `.env.development` and `.env.production`; copy `.env.example` for example.
+
 # Usage
 
 ## Develop

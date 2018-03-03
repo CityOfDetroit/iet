@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+});
+
 module.exports = {
   siteMetadata: {
     title: `IET`,
@@ -15,7 +19,7 @@ module.exports = {
     {
       resolve: `gatsby-source-airtable`,
       options: {
-        apiKey: `key4Wr58a6nmBAGTU`,
+        apiKey: `${process.env.AIRTABLE_API_KEY}`,
         baseId: `appCFPbAUuYs9JPIv`,
         tableName: `Projects`,
         tableView: `Grid view`
