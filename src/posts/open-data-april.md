@@ -8,7 +8,8 @@ tags: ["open-data", "open-data-changelog"]
 
 ### New datasets
 
-- Wayne County Property Tax Foreclosures (https://data.detroitmi.gov/d/2w3q-tkpb)
+- Wayne County Property Tax Foreclosures: https://data.detroitmi.gov/d/2w3q-tkpb
+- Opportunity Zones: https://data.detroitmi.gov/d/ryzr-nwzf
 
 ### Existing datasets
 
