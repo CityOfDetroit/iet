@@ -10,6 +10,8 @@ tags: ["open-data", "open-data-changelog"]
 
 - Wayne County Property Tax Foreclosures: https://data.detroitmi.gov/d/2w3q-tkpb
 - Opportunity Zones: https://data.detroitmi.gov/d/ryzr-nwzf
+- Motor City Match Cash Awardees: https://data.detroitmi.gov/d/sae4-fmvc
+- Motor City Match Restore Awardees: https://data.detroitmi.gov/d/qjux-tfwj
 
 ### Existing datasets
 
