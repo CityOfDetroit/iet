@@ -29,7 +29,7 @@ From the homepage of [data.detroitmi.gov](https://data.detroitmi.gov/), you'll f
   - [Developer Docs](http://dev.socrata.com/?ref=Detroit): Read technical instructions for accessing data through the API
   - [Changelogs](https://cityofdetroit.github.io/iet/tags/open-data-changelog): See what's new month by month
 
-![image of data.detroitmi.gov homepage](https://github.com/iet/src/img/socrata-grid.png "data.detroitmi.gov")
+![image of data.detroitmi.gov homepage](https://github.com/CityOfDetroit/iet/src/img/socrata-grid.png "data.detroitmi.gov")
 
 - Grid: The eight blue boxes represent categories used to organize datasets within the portal. Scroll over each to see an explanation; click to see a list of datasets in that category.
 
