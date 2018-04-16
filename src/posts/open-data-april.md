@@ -15,4 +15,7 @@ tags: ["open-data", "open-data-changelog"]
 
 ### Existing datasets
 
+- Detroit Demolitions: https://data.detroitmi.gov/d/rv44-e9di 
+  - new field: primary funding source
+
 ### New tools built with open data
