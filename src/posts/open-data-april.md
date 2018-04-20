@@ -17,5 +17,7 @@ tags: ["open-data", "open-data-changelog"]
 
 - Detroit Demolitions: https://data.detroitmi.gov/d/rv44-e9di 
   - new field: primary funding source
+- DDOT GTFS replacement: https://data.detroitmi.gov/d/y62d-bvsz/data'
+  - new service changes take effect April 21
 
 ### New tools built with open data
