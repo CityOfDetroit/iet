@@ -18,6 +18,10 @@ tags: ["open-data", "open-data-changelog"]
 - Detroit Demolitions: https://data.detroitmi.gov/d/rv44-e9di 
   - new field: primary funding source
 - DDOT GTFS replacement: https://data.detroitmi.gov/d/y62d-bvsz/data'
-  - new service changes take effect April 21
+  - new service changes took effect April 21
+- Business Licenses: https://data.detroitmi.gov/d/pugj-2dh4
+  - now updates daily
+  - business address is now a single, concatenated field
+  - new fields: owner name, license type
 
 ### New tools built with open data
