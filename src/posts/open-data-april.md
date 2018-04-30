@@ -1,6 +1,6 @@
 ---
 title: "Open Data changelog"
-date: "2018-05-01"
+date: "2018-04-30"
 tags: ["open-data", "open-data-changelog"]
 ---
 
