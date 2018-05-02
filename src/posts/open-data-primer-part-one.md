@@ -1,20 +1,29 @@
 ---
-title: "How to find open data"
+title: "Open data primer: What is it?"
 date: "2018-04-13"
 tags: ["open data", "how to"]
 ---
 
-You'll notice the phrase "open data" a lot around here. We define open data as information about city services and operations available in the public domain, meaning for free without copyright.
+Over the last year, our team has worked to open up Detroit's data. One of our team's values is to build tools using the same infrastructure that is available to the public. An example of that infrastructure is our open data portal. However, we (and many other civic technologists) recognize that there's a gap between making open data _available_ and making sure that residents have the knowledge to use that open data.
 
-Sometimes we interchange "open data" with "open data portal", which refers to the website where we publish data in machine-readable formats. 
+This is the first in a series of blog posts that aims to close that gap. It's a primer on the basics of open data and our open data portal.
 
-If you aren't familiar with these terms yet, this post is a primer on navigating the types and formats of open data provided by the City of Detroit. Find our open data portal and follow along at [data.detroitmi.gov](https://data.detroitmi.gov/).
+### What is open data?
 
-### What's a data portal?
+We use the term "open data" quite a bit. Here's how we define it:
 
-An open data portal is a website where you can search for public records and download data files. Datasets can be formatted as tables, maps, and visualizations. Anyone can access our data and use it in their own projects by downloading it for Excel or making an [API request](https://dev.socrata.com/?ref=Detroit).
+- information about city services and operations
+- available for use by anyone without restrictions
 
-In Detroit's portal, you'll find data points that are quantitative, like the number of [building permits](https://data.detroitmi.gov/d/xw2a-a7tf) issued, and more qualitative in nature, like an [organization flow chart of the Mayor's office](https://data.detroitmi.gov/d/bkt5-fjcc). Many of our data are organized by address or parcel number.
+The City's commitment to open data is formalized in [Executive Order 2015-2](https://data.detroitmi.gov/about). The most important feature of the executive order is the commitment all city data should be open *by default* unless there is a good reason for not publishing it.
+
+### What is a data portal?
+
+An open data portal is a website where you can search for public records and download data files. Detroit's open data portal is located at [data.detroitmi.gov](https://data.detroitmi.gov) - click through and follow along.
+
+The datasets on our portal come in a couple different flavors: as tables, maps, or visualizations. Anyone can access our data and use it in their own projects by downloading it for Excel or making an [API request](https://dev.socrata.com/?ref=Detroit).
+
+In Detroit's portal, you'll find quantitative data, like the number of [building permits](https://data.detroitmi.gov/d/xw2a-a7tf) issued, and more qualitative information, like an [organization flow chart of the Mayor's cabinet](https://data.detroitmi.gov/d/bkt5-fjcc). Many of our data are organized by address or parcel number.
 
 If you've ever looked up open data in other cities, you may have noticed similar web interfaces. Detroit's open data portal is built on a platform called [Socrata](https://socrata.com/), the same one used in [Chicago](https://data.cityofchicago.org/), [NYC](https://opendata.cityofnewyork.us/), [San Francisco](https://datasf.org/opendata/), and many other cities.
 
@@ -51,4 +60,4 @@ The colored buttons along the top right of the table offer more options, notably
 
 ### Stay tuned
 
-We plan to follow up this post with future how-to style open data tutorials, like how to create your own custom visualizations within the open data portal, how to use the API, and more. If you have suggestions or ideas, send them our way at [iet@detroitmi.gov](mailto:iet@detroitmi.gov).
+We'll be posting more entries in this series: how to find open data, how to use it, and more. If you have suggestions or ideas, please send them our way at [iet@detroitmi.gov](mailto:iet@detroitmi.gov).
