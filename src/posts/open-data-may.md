@@ -14,6 +14,8 @@ tags: ["open-data", "open-data-changelog"]
 
 - Right of Way permits now include all types of permits issued by BSEED for construction in the public right of way, instead of just road barricades: https://data.detroitmi.gov/d/rj7w-r8ts
 
+- The parcel map was updated with new parcel shapes: https://data.detroitmi.gov/d/fxkw-udwf
+
 ### New tools built with open data
 
 Have you ever searched for DDOT bus schedules on [detroitmi.gov](http://www.detroitmi.gov/)? If you have, you've probably found [this page](http://www.detroitmi.gov/How-Do-I/Locate-Transportation/Bus-Schedules), downloaded a ~1MB PDF, and spent too long rotating, zooming or pinching your phone screen until you could read it. 
