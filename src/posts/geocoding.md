@@ -1,20 +1,20 @@
 ---
 title: "Address & geocoding primer"
-date: "2018-03-08"
+date: "2018-06-06"
 tags: ["geocoding", "addresses"]
 ---
 
 Let's talk about addresses, why they're important, and how we can use them to derive more information about a place.
 
-Addresses are probably the most common method that people use to refer to a specific place. You may also come across:
+Addresses are probably the most common method used to refer to specific places, like `2 Woodward Avenue`. You may also come across:
 
 - intersections: `6 Mile and Wildemere`,
 - ranges: `Cadieux between Warren and Cincinnati`
 - coordinates: `(42.842354, -83.102335)`
 
-However - the *vast* majority of location data we process at the city comes in the form of an address. Because addresses so omnipresent, tools that can properly understand address input and return useful data about that address are essential infrastructure that nearly every tool we build relies on.
+However - the *vast* majority of location data we process at the city comes in the form of an address. The city sends mail to addresses, assigns addresses to new structures being built, and so much more. Because addresses are so omnipresent, tools that can properly understand address input and return useful data about that address are essential infrastructure that underly nearly every tool we build.
 
-As an example, a very common operation in our open data processes is __geocoding__: the process which turns a text address (`2 Woodward Avenue`) into coordinates which can be plotted on a webmap (`42.329543, -83.043720`), or a parcel identifier that can be used with other datasets (`01004068-86`). In this post, I'll explain how you can utilize the City of Detroit's geocoder in a couple of ways.
+As an example, a very common operation in our open data processes is __geocoding__: the process which turns a text address (`2 Woodward Avenue`) into coordinates which can be plotted on a webmap (`42.329543, -83.043720`), or a parcel identifier that can be used to join to other datasets (`01004068-86`). In this post, I'll explain how you can utilize the City of Detroit's geocoder in a couple of ways.
 
 ## Our three geocoders, and how they work
 
@@ -37,7 +37,7 @@ The disadvantage of this geocoder is that you need to have good input to return 
 
 ### Street centerline
 
-The second option is the __street centerline geocoder__. The reference dataset for this geocoder is a layer of city streets which have an address range attached. The same parsing step is performed, but now the 
+The second option is the __street centerline geocoder__. The reference dataset for this geocoder is a layer of city streets which have an address range attached. The same parsing step is performed, but now the geocoder returns a match based on where your input address *should* exist based on known address ranges.
 
 The main advantage of the street centerline geocoder is that you can match addresses which __don't exist in the address point table__ used by the address point geocoder. The main drawback is that the coordinates returned will be inexact and there will not be a parcel number attached.
 
@@ -58,11 +58,13 @@ The geocoder will indicate in the response which geocoder was used to derive the
 
 ### Web interface
 
-The simplest way to access these is through the endpoint's web interface:
+The simplest way to access these geocoders is through the endpoint's web interface:
 
 - [Composite](https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates)
 - [Address point](https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates)
 - [Street centerline](https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates)
+
+This interface is particularly useful for geocoding one address at a time.
 
 You'll want to know about three key parameters:
 
@@ -72,9 +74,85 @@ This is where your address input should go. In order to work, this should just b
 For intersections, this should be formatted as "Street 1 and Street 2" or "Street 1 & Street 2".
 
 #### Output Spatial Reference (URL parameter: `outSR`)
-This tells what spatial reference the output coordinates should be in. The default is `2898` - we use this because sometimes we want to specify a distance in feet and not degrees.
+This defines what spatial reference the output coordinates should be in. The default is `2898` - we use this because sometimes we want to specify a distance in feet and not degrees.
 
 However, for the vast majority of uses, you'll want this to be `4326`; that way, you'll get lat-long coordinates that other web tools will understand.
 
 #### Out fields (URL parameter: `outFields`)
 You generally want to set this to `*` to return all match fields. Otherwise, you'll just get back coordinates and a cleaned address.
+
+### Batch geocoding
+
+But what if you have a list of addresses, formatted as say a .csv file, and you want to geocode all of them?
+
+(Using QGIS? Using Excel?? TBD)
+
+## Developer workflows, and where you'll find geocoding in our code
+
+As we mentioned earlier, nearly all of the apps that our team builds rely on being able to request address information from our geocoder. Here's two generalized examples of how we commonly implement geocoding in Javascript and Python.
+
+### Javascript
+
+We're assuming you're working in an environment that supports the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Try this:
+
+```js
+// address string
+let value = `2 Woodward`
+
+// empty array to store candidates we'll get back from the geocoder
+let matches = []
+
+// geocoder endpoint, where `single line input` parameter accepts `value`
+let url = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates?Single+Line+Input=${value}&outSR=4326&outFields=*&f=pjson`
+
+// make the request
+fetch(url)
+  .then(r => r.json())
+  .then(d => {
+    // populate list of matches
+    matches.push(d.candidates);
+  })
+  .catch(error => console.log(error));
+```
+
+Now we have a nice JSON response to work with. `matches` looks like: 
+
+```js
+[
+  {
+    "address": "2 WOODWARD AVENUE, 48226",
+    "location": {
+      "x": -83.04367572390908,
+      "y": 42.329681606122804
+    },
+    "score": 100,
+    "attributes": {
+      "Score": 100,
+      "Match_addr": "2 WOODWARD AVENUE, 48226",
+      "House": "2",
+      "Side": "",
+      "PreDir": "",
+      "PreType": "",
+      "StreetName": "WOODWARD",
+      "SufType": "AVENUE",
+      "SufDir": "",
+      "City": "",
+      "State": "",
+      "ZIP": "48226",
+      "Ref_ID": "",
+      "User_fld": "01004068-86",
+      "Addr_type": "PointAddress"
+    }
+  }
+]
+```
+
+By default, the geocoder orders candidates by `"Score"`. If your response has more than one candidate, it's safe to assume that the first one (`matches[0]` in the example above) is the one you'll want.
+
+### Python
+
+Once more in Python now:
+
+```python
+(coming soon.)
+```
