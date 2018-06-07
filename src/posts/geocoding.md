@@ -93,29 +93,32 @@ As we mentioned earlier, nearly all of the apps that our team builds rely on bei
 
 ### Javascript
 
-We're assuming you're working in an environment that supports the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Try this:
+Let's pretend we're building a web map. This web map will have an search box that accepts text input. When someone searches an address, the map should fly-to that place. We want to read this input and request the address' associated lat-lng coordinates from the geocoder to reposition the center of our map.
+
+Assuming you're working in an environment that supports the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), you might write a function like this:
 
 ```js
-// address string
-let value = `2 Woodward`
-
-// empty array to store candidates we'll get back from the geocoder
-let matches = []
-
-// geocoder endpoint, where `single line input` parameter accepts `value`
-let url = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates?Single+Line+Input=${value}&outSR=4326&outFields=*&f=pjson`
-
-// make the request
-fetch(url)
-  .then(r => r.json())
-  .then(d => {
-    // populate list of matches
-    matches.push(d.candidates);
-  })
-  .catch(error => console.log(error));
+/**
+ * Returns more information about an address from the AddressPointGeocoder
+ * @param {string} address
+ * @returns {Promise} Promise object represents a list of matches 
+ *   each match has lat-lng coordinates, a parcel identifier, and more
+ */
+function geocodeAddress(address) { 
+  let matches = [];
+  let url = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates?  Single+Line+Input=${address}&outSR=4326&outFields=*&f=pjson`;
+  
+  return fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      matches.push(data.candidates);
+      return matches;
+    })
+    .catch(error => console.log(error));
+}
 ```
 
-Now we have a nice JSON response to work with. `matches` looks like: 
+Invoking the function like `geocodeAddress('2 woodward')` will return a nice JSON response we can parse accordingly in our application:
 
 ```js
 [
@@ -147,7 +150,7 @@ Now we have a nice JSON response to work with. `matches` looks like:
 ]
 ```
 
-By default, the geocoder orders candidates by `"Score"`. If your response has more than one candidate, it's safe to assume that the first one (`matches[0]` in the example above) is the one you'll want.
+By default, the geocoder orders candidates by `"score"`. If your response has more than one candidate, it's safe to assume that the first one (`matches[0]` in the example above) is the one you'll want.
 
 ### Python
 
