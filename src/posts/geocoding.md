@@ -111,46 +111,16 @@ function geocodeAddress(address) {
   return fetch(url)
     .then(response => response.json())
     .then(data => {
-      matches.push(data.candidates);
+      matches.push(data.candidates[0]);
       return matches;
     })
     .catch(error => console.log(error));
 }
 ```
 
-Invoking the function like `geocodeAddress('2 woodward')` will return a nice JSON response we can parse accordingly in our application:
+The geocoder orders candidates by `"score"`; we're choosing to just keep the first and most likely candidate above.
 
-```js
-[
-  {
-    "address": "2 WOODWARD AVENUE, 48226",
-    "location": {
-      "x": -83.04367572390908,
-      "y": 42.329681606122804
-    },
-    "score": 100,
-    "attributes": {
-      "Score": 100,
-      "Match_addr": "2 WOODWARD AVENUE, 48226",
-      "House": "2",
-      "Side": "",
-      "PreDir": "",
-      "PreType": "",
-      "StreetName": "WOODWARD",
-      "SufType": "AVENUE",
-      "SufDir": "",
-      "City": "",
-      "State": "",
-      "ZIP": "48226",
-      "Ref_ID": "",
-      "User_fld": "01004068-86",
-      "Addr_type": "PointAddress"
-    }
-  }
-]
-```
-
-By default, the geocoder orders candidates by `"score"`. If your response has more than one candidate, it's safe to assume that the first one (`matches[0]` in the example above) is the one you'll want.
+Try it out live in this [Observable Notebook](https://beta.observablehq.com/@jessicamcinchak/geocoding-blog-example).
 
 ### Python
 
