@@ -85,9 +85,9 @@ You generally want to set this to `*` to return all match fields. Otherwise, you
 
 But what if you have a list of addresses and you want to geocode all of them at once?
 
-You can find plenty of tutorials and plugins to enable batch geocoding with your software of choice: [ArcMap](http://desktop.arcgis.com/en/arcmap/10.3/guide-books/geocoding/geocoding-a-table-of-addresses-in-arcmap.htm), [QGIS](https://www.gislounge.com/how-to-geocode-addresses-using-qgis/), and even [Excel](http://grindgis.com/software/microsoft-excel/geocoding-excel-and-google).
+You can find plenty of tutorials and plugins to enable batch geocoding with your software of choice: [ArcMap](http://desktop.arcgis.com/en/arcmap/10.3/guide-books/geocoding/geocoding-a-table-of-addresses-in-arcmap.htm), [QGIS](https://www.gislounge.com/how-to-geocode-addresses-using-qgis/), and even [Microsoft Office](https://doc.arcgis.com/en/maps-for-office/install-and-configure/configure-a-custom-geocoder.htm).
 
-Alternatively, we've been prototyping a simple geocoding web app that accepts a list of Detroit addresses and returns additional location fields. This tool favors spreadsheet workflows, whether that's a Smartsheet, Google Sheet or CSV. You can copy and paste a list of addresses directly into the app's search and we'll generate a table of results that can be smoothly copy and pasted right back into your original workspace.
+Alternatively, we've been prototyping a simple geocoding web app that accepts a list of Detroit addresses and returns additional location fields. This tool favors spreadsheet workflows, whether that's a Smartsheet, Google Sheet or CSV. You can copy and paste a list of addresses directly into the app's search and we'll generate a table of results that can be smoothly copy-and-pasted right back into your original workspace.
 
 Give it a spin here: https://cityofdetroit.github.io/geocode/
 
