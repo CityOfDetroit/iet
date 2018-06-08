@@ -64,7 +64,7 @@ The simplest way to access these geocoders is through the endpoint's web interfa
 - [Address point](https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates)
 - [Street centerline](https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates)
 
-This interface is particularly useful for geocoding one address at a time.
+This interface is particularly useful for looking up one address at a time.
 
 You'll want to know about three key parameters:
 
@@ -83,9 +83,13 @@ You generally want to set this to `*` to return all match fields. Otherwise, you
 
 ### Batch geocoding
 
-But what if you have a list of addresses, formatted as say a .csv file, and you want to geocode all of them?
+But what if you have a list of addresses and you want to geocode all of them at once?
 
-(Using QGIS? Using Excel?? TBD)
+You can find plenty of tutorials and plugins to enable batch geocoding with your software of choice: [ArcMap](http://desktop.arcgis.com/en/arcmap/10.3/guide-books/geocoding/geocoding-a-table-of-addresses-in-arcmap.htm), [QGIS](https://www.gislounge.com/how-to-geocode-addresses-using-qgis/), and even [Excel](http://grindgis.com/software/microsoft-excel/geocoding-excel-and-google).
+
+Alternatively, we've been prototyping a simple geocoding web app that accepts a list of Detroit addresses and returns additional location fields. This tool favors spreadsheet workflows, whether that's a Smartsheet, Google Sheet or CSV. You can copy and paste a list of addresses directly into the app's search and we'll generate a table of results that can be smoothly copy and pasted right back into your original workspace.
+
+Give it a spin here: https://cityofdetroit.github.io/geocode/
 
 ## Developer workflows, and where you'll find geocoding in our code
 
@@ -93,7 +97,7 @@ As we mentioned earlier, nearly all of the apps that our team builds rely on bei
 
 ### Javascript
 
-Let's pretend we're building a web map. This web map will have an search box that accepts text input. When someone searches an address, the map should fly-to that place. We want to read this input and request the address' associated lat-lng coordinates from the geocoder to reposition the center of our map.
+Let's say we're tasked with building a web map. This web map will have a search box that accepts an address as text input. When someone searches an address, the map should fly-to that place. So, we'll need to read this input and request the address' associated lat-lng coordinates from the geocoder to reposition the center of our map.
 
 Assuming you're working in an environment that supports the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), you might write a function like this:
 
@@ -118,14 +122,15 @@ function geocodeAddress(address) {
 }
 ```
 
-The geocoder orders candidates by `"score"`; we're choosing to just keep the first and most likely candidate above.
+This function will return nice JSON `matches` that we can parse accordingly in our app. The geocoder orders candidates by `"score"`; we're choosing to just keep the first and most likely candidate above.
 
 Try it out live in this [Observable Notebook](https://beta.observablehq.com/@jessicamcinchak/geocoding-blog-example).
 
 ### Python
 
-Once more in Python now:
+When it comes to geocoding in Python, we'll point you straight to the [ArcGIS API for Python](https://developers.arcgis.com/python/). You'll find many useful methods for working with geospatial data in this library, like:
+- [geocoding](https://developers.arcgis.com/python/guide/understanding-the-geocode-function/) a single location
+- [batch geocoding](https://developers.arcgis.com/python/guide/batch-geocoding/) up to 1,000 addresses at a time
+- [reverse geocoding](https://developers.arcgis.com/python/guide/reverse-geocoding/) a x-y coordinate to return a street address
 
-```python
-(coming soon.)
-```
+We use the `arcgis` library in our ETL workflows for open data. We commonly have a table of data where one column is an address and we want to add additional columns with location coordinates and a parcel number. Check out [this Python class](https://github.com/CityOfDetroit/etl/blob/master/etl/geocode.py) to see how it works.
