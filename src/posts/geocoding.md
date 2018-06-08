@@ -14,7 +14,7 @@ Addresses are probably the most common method used to refer to specific places, 
 
 However - the *vast* majority of location data we process at the city comes in the form of an address. The city sends mail to addresses, assigns addresses to new structures being built, and so much more. Because addresses are so omnipresent, tools that can properly understand address input and return useful data about that address are essential infrastructure that underly nearly every tool we build.
 
-As an example, a very common operation in our open data processes is __geocoding__: the process which turns a text address (`2 Woodward Avenue`) into coordinates which can be plotted on a webmap (`42.329543, -83.043720`), or a parcel identifier that can be used to join to other datasets (`01004068-86`). In this post, I'll explain how you can utilize the City of Detroit's geocoder in a couple of ways.
+As an example, a very common operation in our open data processes is __geocoding__: the process which turns a text address (`2 Woodward Avenue`) into coordinates which can be plotted on a webmap (`42.329543, -83.043720`), or a parcel identifier that can be used to join to other datasets (`01004068-86`). In this post, we'll explain how you can utilize the City of Detroit's geocoder in a couple of ways.
 
 ## Our three geocoders, and how they work
 
