@@ -1,7 +1,7 @@
 ---
 title: "Open data primer: What is it?"
 date: "2018-04-13"
-tags: ["open data", "how to"]
+tags: ["open-data", "how to"]
 ---
 
 Over the last year, our team has worked to open up Detroit's data. One of our team's values is to build tools using the same infrastructure that is available to the public. An example of that infrastructure is our open data portal. However, we (and many other civic technologists) recognize that there's a gap between making open data _available_ and making sure that residents have the knowledge to use that open data.
