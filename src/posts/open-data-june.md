@@ -1,6 +1,6 @@
 ---
 title: "Open Data changelog"
-date: "2018-07-01"
+date: "2018-07-05"
 tags: ["open-data", "open-data-changelog"]
 ---
 
@@ -12,4 +12,8 @@ tags: ["open-data", "open-data-changelog"]
 
 ### Existing datasets
 
+- Rental registrations now has a `council_district` field: https://data.detroitmi.gov/d/64cb-n6dd
+
 ### New tools built with open data
+
+- [Permit Viewer](https://cityofdetroit.github.io/permits)
