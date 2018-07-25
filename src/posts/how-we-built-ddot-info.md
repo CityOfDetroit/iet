@@ -1,8 +1,10 @@
 ---
-title: "How we built ddot.info"
+title: "A better way to catch your bus: how we built ddot.info"
 date: "2018-07-12"
 tags: ["web-app", "gtfs", "onebusaway", "buses"]
 ---
+
+
 
 Earlier this month, a bus schedule tool we built in partnership with Detroit's Department of Transportation (DDOT) was [announced on social media](https://www.facebook.com/RideDDOT/videos/vb.419710504742021/1841950199184704/?type=3&theater). We designed this tool to help bus riders find schedules and realtime arrival predictions for all DDOT routes and bus stops. You can check it out at [ddot.info](https://ddot.info/). 
 
@@ -20,21 +22,21 @@ So, our first development goal was to simply replicate the schedule portion of t
 
 ## Our underlying data
 
-We were able to take advantage of previous work to get started quickly - in _2010?_, _LocalData/CfA?_ built the "Text My Bus" tool, which meant we could utilize the same *OneBusAway* REST API for real-time data. We also get regular GTFS updates from DDOT, which we then post to the city's open data portal [here](https://data.detroitmi.gov/Transportation/DDOT-GTFS-file/y62d-bvsz).
+We were able to take advantage of previous work to get started quickly - in _2010?_, _LocalData/CfA?_ built the "Text My Bus" tool, which meant we could utilize the same *OneBusAway* REST API for real-time data. We also get regular [GTFS (General Transit Feed Specification)](https://developers.google.com/transit/gtfs/) updates from DDOT, which we then post to the city's open data portal [here](https://data.detroitmi.gov/Transportation/DDOT-GTFS-file/y62d-bvsz).
 
 We wanted to create nicely formatted schedules that mimicked the printed schedules as closely as possible. In order to do that, we needed to do some semi-manual editing of the GTFS data, including populate the `timepoint` field in `stop_times.txt` - this field "specifies which stop_times the operator will attempt to strictly adhere to (timepoint=1), and that other stop times are estimates (timepoint=0)" (via the [GTFS best practices](http://gtfs.org/best-practices/#stop_times_3) 
 
-We spent a couple hours recording the `stop_id` for each timepoint in each direction for each route. After loading the GTFS data into a PostgreSQL database using this handy [GTFS SQL importer](https://github.com/fitnr/gtfs-sql-importer), we used Python to loop through each route and direction and set the `timepoint` field. The next step was to use Python to create the schedule table structure as JSON, which our application could consume. 
+We spent a couple hours recording the `stop_id` for each timepoint in each direction for each route. After loading the GTFS data into a [PostgreSQL](https://www.postgresql.org) database using this handy [GTFS SQL importer](https://github.com/fitnr/gtfs-sql-importer), we used Python to loop through each route and direction and set the `timepoint` field. The next step was to use Python to create the schedule table structure as JSON, which our application could consume. 
 
 This was a brute-force method to get the application working quickly, but it has a few drawbacks:
-- We have to run a few Python scripts every time our GTFS changes - thankfully, this is limited to a few times per year
-- We package a few large JSON data structures into our bundle, which increases load time before the app runs
+- We have to run a few Python scripts every time our GTFS data changes - thankfully, this is limited to a few times per year
+- We package a few large [JSON](https://www.json.org/) data structures into our bundle, which increases load time before the app runs
 
-We're currently exploring a couple avenues for replacing this pattern. We're pretty excited about GraphQL and particularly Postgraphile, which is a project that turns a Postgres database schema into an instant GraphQL backend. Since we get the schema "for free" through `gtfs-sql-importer`, we can go from GTFS to GraphQL in a matter of minutes. However, we also need to be mindful of a major technology overhaul happening at DDOT which should improve AVL coverage to 100% and give us a GTFS-RT feed, so we want to stay fairly flexible.
+We're currently exploring a couple avenues for replacing this pattern. We're pretty excited about [GraphQL](https://graphql.org/) and [Postgraphile](https://www.graphile.org/postgraphile/), a tool that turns a Postgres database schema into an instant GraphQL backend. Since we get the schema "for free" through `gtfs-sql-importer`, we can go from GTFS to GraphQL in a matter of minutes. We want to stay fairly flexible, though: a major technology overhaul is happening at DDOT to equip *all* buses with real-time data. Additionally, we'll be consuming a [GTFS-RT]() feed, which will require some updates to our app.
 
 ## Iteration one / first commits
 
-Our GTFS-to-json Python scripts were already producing the data - we just needed to display it on a per-route basis. We picked the popular front-end [React](https://reactjs.org/) library, specifically the Create React App boilerplate, to start building. React was a good choice for us because we could clearly map our UI components, like a schedule time table to start, to our application's state; this declarative style would scale well as we tested how to present various slices of transit data in different ways.
+Our GTFS-to-json Python scripts were already producing the data - we just needed to display it on a per-route basis. We picked the popular front-end [React](https://reactjs.org/) library, specifically the Create React App boilerplate, to start building. We chose React because it encourages packaging actions (as Javascript) and UI components (as HTML and CSS) together; for instance, a component which would display the next buses at a stop can contain the logic to fetch and process the realtime data along with the HTML and CSS we need to display that data. This makes iterating very rapid; since components of the app are encapsulated, it's easy to add, remove, or change component's behaviors and presentation.
 
 Rolling back to this [commit](https://github.com/CityOfDetroit/route-explorer/commit/461f942e8817359205926c265c116c1d4cc70845) shows the very start of our app - you can search for a route, click a link, and see a poorly-formatted schedule table. Additionally, we're using [react-router]() to push information into the URL, which is important for bookmarking.
 
@@ -53,15 +55,20 @@ for each stop X
       find stop Z, serving route Y, which is closest to X
 ```
 
-Since we were creating a number of different maps (a system map; a route map; an individual stop map), we decided to use the [react-map-gl]() library to reduce some boilerplate code.
+Since we were creating a number of different maps (a system map; a route map; an individual stop map), we decided to use the [react-map-gl](https://uber.github.io/react-map-gl/#/) library to reduce boilerplate code.
 
-We also wanted a bit more polished UI, so we decided to implement the [material-ui]() design framework and move away from [tachyons](), which is a great CSS toolkit but proved difficult to coordinate over a growing app. Along with material-ui, we started heavily relying on CSS Grid (and learning about CSS Grid with [Layout Land](https://www.youtube.com/channel/UC7TizprGknbDalbHplROtag)).
+We also wanted a bit more familiar UI, so we decided to implement the [material-ui](https://material-ui.com/) React component library and move away from [tachyons](https://tachyons.io/), which is a great CSS toolkit for quickly creating a working prototype, but caused collisions with the built-in styling options provided by material-ui. 
+
+To create the overall layout of the page, as well as some components such as the homepage route grid, we started using the relatively new [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) feature; the [Layout Land](https://www.youtube.com/channel/UC7TizprGknbDalbHplROtag) YouTube channel was a big help here.
 
 ## Iteration three / "it looks good"
 
-At this point we were comfortable with our data and proof-of-concept features, so be backed up a bit and began to think a bit more deeply about the overall purpose of this app with our partners at DDOT - how would users get the _important_ information? How would we explain DDOT service in ways that are unique and complimentary to other existing tools like Transit app and TextMyBus? How could we address common points of confusion among riders heard by DDOT customer service, like "what are the stops on my route between the print schedule timepoints?" 
+At this point we were comfortable with our data and proof-of-concept features, so we took a step back and thought more deeply about the overall purpose of this app with our partners at DDOT, who posed some hard questions for us:
 
-We decided on three main entry points from the homepage:
+- how would users get the _important_ information? 
+- how would we explain DDOT service in ways that are unique and complimentary to other existing tools like Transit app and TextMyBus? - - how could we address common points of confusion among riders heard by DDOT customer service, like "what are the stops on my route between the print schedule timepoints?" 
+
+From this discussion, we decided on three main entry points from the homepage:
 
 - search by route
 - search by stop
@@ -87,7 +94,7 @@ DDOT provided us with text for each route that we could put on the main route la
 - whether that trip has a scheduled or live prediction
 - a bus stop (a custom, squared-off take on nature_people)
 
-Finally, we deployed the site to Netlify, which is a great alternative to GitHub pages that lets us do [continuous integration] of our site!
+Finally, we deployed the site to [Netlify](https://www.netlify.com), which is a great alternative to GitHub pages that lets us do [continuous deployment](https://www.netlify.com/docs/continuous-deployment/) of our site!
 
 ## After thoughts
 
