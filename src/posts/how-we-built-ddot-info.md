@@ -26,6 +26,32 @@ We wanted to create nicely formatted schedules that mimicked the printed schedul
 
 We spent a couple hours recording the `stop_id` for each timepoint in each direction for each route. After loading the GTFS data into a [PostgreSQL](https://www.postgresql.org) database using this handy [GTFS SQL importer](https://github.com/fitnr/gtfs-sql-importer), we used Python to loop through each route and direction and set the `timepoint` field. The next step was to use Python to create the schedule table structure as JSON, which our application could consume. 
 
+Basically, we wanted to go from this (simplified) `stop_times.txt` structure:
+
+| trip_id | arrival_time | stop_id              | timepoint |
+|---------|--------------|----------------------|-----------|
+| 1174891 | 09:00:00     | Vernor & Grand Blvd. | 1         |
+| 1174891 | 09:03:00     | Vernor & Scotten     | 0         |
+| 1174891 | 09:04:00     | Vernor & Clark       | 0         |
+| 1174891 | 09:05:00     | Vernor & Junction    | 0         |
+| 1174891 | 09:07:00     | Vernor & Livernois   | 1         |
+
+to this JSON structure:
+
+```
+{
+        "rt_name": "Vernor",
+        "schedules": {
+            "weekday": {
+                "eastbound": {
+                    "timepoints": ["Vernor & Grand Blvd", "Vernor & Livernois"...],
+                    "trips": [{
+                        "trip_id": "1174891",
+                        "timepoints": ["9:00am", "9:07am"...]
+                    },
+                    ...
+```
+
 This was a brute-force method to get the application working quickly, but it has a few drawbacks:
 - We have to run a few Python scripts every time our GTFS data changes - thankfully, this is limited to a few times per year
 - We package a few large [JSON](https://www.json.org/) data structures into our bundle, which increases load time before the app runs
