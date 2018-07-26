@@ -14,7 +14,7 @@ In this post, rather than talk about what the app does (which you can find at [d
 
 Like a lot of municipal websites, ours has a tendency to tuck away valuable information in PDFs. One of the most visited pages on detroitmi.gov is [this one](https://www.detroitmi.gov/How-Do-I/Locate-Transportation/Bus-Schedules), where people (used to) come to download ~1Mb PDFs of fixed bus schedules usually onto their phones.
 
-(add old detroitmi.gov screenshot)
+![alt text](http://dataresources.theneighborhoods.org/sites/dataresources.theneighborhoods.org/files/2018-07/old-bus-schedules.PNG "Old detroitmi.gov")
 
 So, our first development goal was to simply replicate the schedule portion of the PDF as searchable web content. As bus riders ourselves, we really just never want to see someone pinching their phone screen and squinting at a time table again.
 
@@ -84,9 +84,9 @@ We then began to turn our attention to the rest of the PDF schedule, which also 
 
 ## Iteration two / experiments with libraries and frameworks
 
-After some IRL testing on our commutes, we decided to build a new URL route for individual bus stops (https://ddot.info/stop/3032 for the stop on the SE corner of Hamilton and Puritan). This meant we could bookmark our stops in the morning and jump straight there to see what time we needed to catch the bus.
+After some IRL testing on our commutes, we decided to build a new URL route for individual bus stops (https://ddot.info/stop/3032 for the stop on the SE corner of Hamilton and Puritan). This meant we could bookmark our stops and jump straight there to see what time we needed to catch the bus.
 
-(add a ddot.info stop page screenshot here)
+![alt text](http://dataresources.theneighborhoods.org/sites/dataresources.theneighborhoods.org/files/2018-07/ddotStopPage.PNG "Stop page")
 
 We also wanted to add transfer information. GTFS supports transfers with `transfers.txt`, but we had to manually create this list using PostGIS queries in Python, reduced down to an additional field in our `stops.js` JSON structure. In pseudocode:
 
@@ -117,7 +117,7 @@ From this discussion, we decided on three main entry points from the homepage:
 - search by stop
 - show nearby routes and stops (using the HTML5 Geolocation API)
 
-(add a ddot.info screenshot here)
+![alt text](http://dataresources.theneighborhoods.org/sites/dataresources.theneighborhoods.org/files/2018-07/ddotHome.PNG "Homepage")
 
 We also concentrated on making all of our pages more intuitive. Broadly, we tried to:
 
@@ -141,7 +141,7 @@ Finally, we deployed the site to [Netlify](https://www.netlify.com), which is a 
 
 ## After thoughts
 
-- It's really gratifying to build an app that you want to use everyday yourself. It also creates a lot of incentive to have a working development site each day, even if it doesn't look good yet or some feature might work totally different tomorrow
+- It's really gratifying to build the tool that you want to use everyday. It also creates a lot of incentive to have a working development site each day, even if it doesn't look good yet or some feature might work totally different tomorrow
 - We're still learning what it means to establish ourselves as a "prototype" team. At about six months long, this project felt bulky and sluggish at points; it can feel hard to hear new feature requests after all of your initially scoped proof-of-concept ideas are proven. But in the end, we deployed a collaborative product that we're proud of and DDOT is confident in to serve their riders
 - There's always a next project. Something that ddot.info doesn't currently support is trip-planning, or the ability to ask "I'm here and I want to go there, what bus(es) can I take?" We're excited to learn more about [Open Trip Planner's](http://www.opentripplanner.org/) suite of tools and start working more with regional transit data sources in the future
 
