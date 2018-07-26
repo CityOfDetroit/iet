@@ -35,6 +35,11 @@ Basically, we wanted to go from this (simplified) `stop_times.txt` structure:
 | 1174891 | 09:04:00     | Vernor & Clark       | 0         |
 | 1174891 | 09:05:00     | Vernor & Junction    | 0         |
 | 1174891 | 09:07:00     | Vernor & Livernois   | 1         |
+| 1174892 | 10:00:00     | Vernor & Grand Blvd. | 1         |
+| 1174892 | 10:03:00     | Vernor & Scotten     | 0         |
+| 1174892 | 10:04:00     | Vernor & Clark       | 0         |
+| 1174892 | 10:05:00     | Vernor & Junction    | 0         |
+| 1174892 | 10:07:00     | Vernor & Livernois   | 1         |
 
 to this JSON structure:
 
@@ -49,8 +54,19 @@ to this JSON structure:
                         "trip_id": "1174891",
                         "timepoints": ["9:00am", "9:07am"...]
                     },
+                    {
+                        "trip_id": "1174892",
+                        "timepoints": ["10:00am", "10:07am"...]
+                    },
                     ...
 ```
+
+and eventually displayed like this to the end user:
+
+| Vernor & Grand Blvd | Vernor & Livernois | ... |
+|---------------------|--------------------|-----|
+| 9:00am              | 9:07am             | ... |
+| 10:00am             | 10:07am            | ... |
 
 This was a brute-force method to get the application working quickly, but it has a few drawbacks:
 - We have to run a few Python scripts every time our GTFS data changes - thankfully, this is limited to a few times per year
