@@ -23,7 +23,7 @@ So, our first development goal was to simply replicate the schedule portion of t
 
 We were able to take advantage of previous work to get started quickly - in 2012 Detroit's Code for America fellows built the [TextMyBus](https://www.codeforamerica.org/past-projects/textmybus) SMS application and configured a [OneBusAway REST API](http://developer.onebusaway.org/modules/onebusaway-application-modules/1.1.14/api/where/index.html) endpoint for realtime data that we can share. We also get regular [GTFS (General Transit Feed Specification)](https://developers.google.com/transit/gtfs/) updates from DDOT which reflect the fixed route schedules; you can find it on the city's open data portal [here](https://data.detroitmi.gov/Transportation/DDOT-GTFS-file/y62d-bvsz).
 
-We wanted to create nicely formatted schedules that mimicked the printed schedules as closely as possible. In order to do that, we needed to do some semi-manual editing of the GTFS data, including populate the `timepoint` field in `stop_times.txt` - this field "specifies which stop_times the operator will attempt to strictly adhere to (timepoint=1), and that other stop times are estimates (timepoint=0)" (via the [GTFS best practices](http://gtfs.org/best-practices/#stop_times_3)).
+We wanted to create nicely formatted schedules that mimicked the printed schedules as closely as possible. In order to do that, we needed to do some semi-manual editing of the GTFS data, including populate the `timepoint` field in `stop_times.txt`. This field "specifies which `stop_times` the operator will attempt to strictly adhere to (`timepoint=1`), and that other stop times are estimates (`timepoint=0`)" (via the [GTFS best practices](http://gtfs.org/best-practices/#stop_times)).
 
 We spent a couple hours recording the `stop_id` for each timepoint in each direction for each route. After loading the GTFS data into a [PostgreSQL](https://www.postgresql.org) database using this handy [GTFS SQL importer](https://github.com/fitnr/gtfs-sql-importer), we used Python to loop through each route and direction and set the `timepoint` field. The next step was to use Python to create the schedule table structure as JSON, which our application could consume. 
 
@@ -73,7 +73,7 @@ This was a brute-force method to get the application working quickly, but it has
 - We have to run a few Python scripts every time our GTFS data changes - thankfully, this is limited to a few times per year
 - We package a few large [JSON](https://www.json.org/) data structures into our bundle, which increases load time before the app runs
 
-We're currently exploring a couple avenues for replacing this pattern. We're pretty excited about [GraphQL](https://graphql.org/) and [Postgraphile](https://www.graphile.org/postgraphile/), a project that turns a Postgres database schema into an instant GraphQL backend. Since we get the schema "for free" through `gtfs-sql-importer`, we can go from GTFS to GraphQL in a matter of minutes. We want to stay fairly flexible, though; a major technology overhaul is happening at DDOT to equip *all* buses with Automatic Vehicle Location (AVL) technology to collect realtime data (about 75% are equipped today) and produce a [GTFS-RT (realtime)](https://developers.google.com/transit/gtfs-realtime/) feed.
+We're currently exploring a couple avenues for replacing this pattern. We're pretty excited about [GraphQL](https://graphql.org/) and [Postgraphile](https://www.graphile.org/postgraphile/), a project that turns a Postgres database schema into an instant GraphQL backend. Since we get the schema "for free" through `gtfs-sql-importer`, we can go from GTFS to GraphQL in a matter of minutes. We want to stay fairly flexible, though; a major technology overhaul is happening at DDOT to equip *all* buses with Automatic Vehicle Location (AVL) technology to collect realtime data (about 75% are equipped today) and produce a [GTFS-RT (Realtime)](https://developers.google.com/transit/gtfs-realtime/) feed.
 
 ## Iteration one: first commits
 
@@ -126,7 +126,7 @@ We also concentrated on making all of our pages more intuitive. Broadly, we trie
 
 - _present key information up front_ on the stop page, showing the scheduled times and realtime arrivals together instead of forcing the user to toggle between the two
 - _de-emphasize rarely-used information_ on the stop page, delineating transfers as its own tab next to the routes instead of having its own dedicated space on the page
-- _remove unnecessary information_: for example there used to be a map at [ddot.info/route/49/stops]; now there's just a list of stops in order
+- _remove unnecessary information_: for example there used to be a map at [ddot.info/route/49/stops](https://ddot.info/route/49/stops); now there's just a list of stops in order
 
 ## Iteration four: "it looks really good"
 
@@ -145,7 +145,7 @@ Finally, we deployed the site to [Netlify](https://www.netlify.com), which is a 
 ## After thoughts
 
 - It's really gratifying to build the tool that you want to use everyday. It also creates a lot of incentive to have a working development site each day, even if it doesn't look good yet or some feature might be totally different tomorrow
-- We're still learning what it means to assert ourselves as a "prototype" team. At about six months long, this project felt bulky and sluggish at points; it can feel hard to hear new feature requests and implementing them after all of your initially scoped proof-of-concept ideas are proven. But in the end, we deployed a collaborative product that we're proud of and DDOT is confident in to serve their riders
+- We're still learning what it means to assert ourselves as a "prototype" team. At about six months long, this project felt bulky and sluggish at points; it was hard sometimes to hear new feature requests and be asked to implement them after all of our initially scoped proof-of-concept ideas were proven. But in the end, we deployed a collaborative product that we're proud of and DDOT is confident in to serve their riders
 - There's always a next project. Something that ddot.info doesn't currently support is trip-planning, or the ability to ask "I'm here and I want to go there, what bus(es) can I take?" We're excited to dig into [Open Trip Planner's](http://www.opentripplanner.org/) suite of tools and regional transit data sources in the future
 
 Thanks for reading. Check out [ddot.info](https://ddot.info/) for bus schedules and find [our code](https://github.com/CityOfDetroit/route-explorer) on Github; [feedback](https://app.smartsheet.com/b/form/28665a43770d48b5bbdfe35f3b7b45ac), [bug reports](https://github.com/CityOfDetroit/route-explorer/issues/new), and pull requests always welcome.
