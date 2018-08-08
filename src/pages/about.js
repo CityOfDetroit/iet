@@ -5,6 +5,13 @@ import TeamMember from '../components/TeamMember'
 
 const About = ({ data }) => {
   const us = [
+    {
+      name: 'Kat Hartman',
+      title: 'Director of Emerging Technology',
+      github: '',
+      blurb: '',
+      color: '#d4af37',
+    },
     { 
       name: 'Jimmy McBroom', 
       title: 'GIS Analyst', 
@@ -23,7 +30,7 @@ const About = ({ data }) => {
       name: 'Juan Carlos Angeles', 
       title: 'Front-end Web Developer', 
       github: '', 
-      blurb: '',
+      blurb: 'Juan Carlos worked on developing web-based apps for national brands prior to joining IET in January 2017. His goal is to use his experience to deliver attractive and accessible web interfaces to the citizens of Detroit.',
       color: '#278b7e',
     },
     {
