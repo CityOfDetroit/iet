@@ -10,7 +10,7 @@ tags: ["open-data", "open-data-changelog"]
 
 
 ### Existing datasets
-
+- Updated [Detroit People Mover GTFS]() to extend `calendar` validity through 2020. 
 
 ### Removed datasets
 - We had an outdated map on our site of *Election Polling Locations*. See <some dataset> for up-to-date data.
