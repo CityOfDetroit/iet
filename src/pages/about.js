@@ -9,7 +9,7 @@ const About = ({ data }) => {
       name: 'Kat Hartman',
       title: 'Director of Emerging Technology',
       github: '',
-      blurb: '',
+      blurb: 'Prior to starting this position in July 2018, Kat contributed directly to the design of data heavy products and interactions at both bespoke and enterprise scales. In addition to visualizing data, she enjoys thinking in systems and translating complexity into accessible metaphors and stories.',
       color: '#d4af37',
     },
     { 
