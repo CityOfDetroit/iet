@@ -24,4 +24,4 @@ It's been a busy two months.
 
 ### Team updates
 
-Kat Hartman joined our team as the new Director of Emerging Technology in early July. Together, we've been refining our team's mission and developing processes to work more intentionally. Read more on [our About page](https://cityofdetroit.github.io/iet/about/).
+Kat Hartman joined our team as the new Director of Emerging Technology in early July. Together, we're refining our team's mission and developing frameworks to work more intentionally. Keep an eye out for updated notes on that process on our [our About page](https://cityofdetroit.github.io/iet/about/) soon.
