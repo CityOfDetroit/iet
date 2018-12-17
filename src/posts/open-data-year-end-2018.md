@@ -10,7 +10,7 @@ We didn't mean to let our changelogs drift off, but alas here's a wrap up of wha
   - Certifications:
 - Lead Clearances: 
 - Strategic Neighborhood Fund boundaries:
-- 
+- Confirmed Communicable Diseases by Quarter
 
 We've also started hosting copies of reports available as "Documents" on detroitmi.gov directly on the open data portal for improved search-ability and access. For example, you can now find:
 - OCFO financial reports
