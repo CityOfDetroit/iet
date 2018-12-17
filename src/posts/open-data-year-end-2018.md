@@ -4,7 +4,7 @@ We didn't mean to let our changelogs drift off, but alas here's a wrap up of wha
 
 ## New datasets
 
-- Construction contracts who are currently registered or licensed with BSEED:   
+- Construction contractors who are currently registered or licensed with BSEED:   
 - Vacant Property Ordinance (VPO) Cases that were previously lumped together with rental ordinance data, but are now split out into their own datasets:
   - Registrations:
   - Certifications:
@@ -20,6 +20,7 @@ We've also started hosting copies of reports available as "Documents" on detroit
   - Charter and private schools:
   - Daycares: 
 - Emergency Manager Orders
+- Legislative Policy Division reports
 
 ## Updates to existing datasets
 
