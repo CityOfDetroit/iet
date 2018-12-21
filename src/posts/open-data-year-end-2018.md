@@ -1,8 +1,14 @@
-# Year end 2018
+---
+title: "Open Data changelog"
+date: "2018-12-21"
+tags: ["open-data", "open-data-changelog"]
+---
+
+## Year end 2018
 
 We didn't mean to let our changelogs drift off, but alas here's a wrap up of what's changed over the final months of 2018 and what to expect in the new year.
 
-## New datasets
+### New datasets
 
 - Construction contractors who are currently registered or licensed with BSEED: https://data.detroitmi.gov/d/jmxt-73rk 
 - Vacant Property Ordinance (VPO) Cases that were previously lumped together with rental ordinance data, but are now split out into their own datasets:
@@ -22,7 +28,7 @@ We've also started hosting copies of reports available as "Documents" on detroit
 - Emergency Manager Orders: https://data.detroitmi.gov/d/ymi9-g32a
 - Legislative Policy Division reports: https://data.detroitmi.gov/d/rn4h-puvf
 
-## Updates to existing datasets
+### Updates to existing datasets
 
 - New rounds of Motor City Match & Motor City Restore awardees:
   - MCM: https://data.detroitmi.gov/d/sae4-fmvc 
@@ -31,6 +37,6 @@ We've also started hosting copies of reports available as "Documents" on detroit
 - DPD 911 Calls for Service (https://data.detroitmi.gov/d/wgv9-drfc) still updates daily, but calls are now posted a full day after the original call date to ensure the call has been fully closed out. We've also filtered out duplicate calls after learning new information about how call dispatchers intake reports. This filter corrects for example cases like this one: a caller calls about a Nonviolent Disturbance (Priority 3) at 10 AM. At 11 AM, the caller calls again to update DPD that the disturbance has turned violent or a gun has appeared. DPD then would change the priority from 3 to 1. If DPD then arrived at the scene at 11:10 AM, then the total response time would show 70 minutes instead of 10 minutes, which was the total response time for the priority 1 call.
 - Detroit Local Historic Districts (https://data.detroitmi.gov/d/h3e6-c5eu) is now hosted on ArcGIS Online, but can be found on Socrata.
 
-## Coming soon
+### Coming soon
 
 - Restaurant inspection data!

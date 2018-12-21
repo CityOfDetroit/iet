@@ -5,6 +5,14 @@
  * Also this: https://www.gatsbyjs.org/tutorial/part-four/#programmatically-creating-pages-from-data
  */
 
+exports.modifyBabelrc = ({ babelrc }) => ({
+  ...babelrc,
+  plugins: babelrc.plugins.concat(
+    ['transform-regenerator'],
+    ['transform-runtime']
+  ),
+})
+
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
